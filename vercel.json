@@ -1,0 +1,28 @@
+{
+  "builds": [
+    {
+      "src": "api/*.go",
+      "use": "@vercel/go"
+    },
+    {
+      "src": "vercel-build.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "quiz_app_frontend/build/web"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "quiz_app_frontend/build/web/index.html"
+    }
+  ]
+}
